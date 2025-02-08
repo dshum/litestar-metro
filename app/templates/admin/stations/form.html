@@ -1,0 +1,16 @@
+{% set url = url_for('admin.station.update', station_id=station.id) if station else url_for('admin.station.create') %}
+{% set action = "Save" if station else "Add" %}
+
+<form
+    hx-trigger="submit" hx-post="{{ url }}"
+    hx-target="this" hx-swap="outerHTML">
+  <div class="w-full">
+    <div class="flex flex-col gap-3">
+      {% include "components/form/form.html" %}
+
+      <fieldset class="fieldset">
+        <button class="btn btn-primary w-full">{{ action }}</button>
+      </fieldset>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minecraft Metro</title>
+  <link rel="icon" href="{{ url_for('vite', file_path='images/favicon.png') }}" sizes="16x16" type="image/png">
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme") || "light"
+      document.documentElement.setAttribute("data-theme", savedTheme)
+    })()
+  </script>
+</head>
+
+<body class="overflow-y-scroll antialiased">
+<div class="min-h-screen flex flex-col">
+  <div class="container">
+    {% include "admin/components/header.html" %}
+  </div>
+
+  <div id="alert-error" class="toast toast-top toast-center hidden">
+    <div class="alert alert-error">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <span></span>
+    </div>
+  </div>
+
+  {% include "admin/components/flashes.html" %}
+
+  <main class="container flex-1">
+    <div class="flex flex-col lg:flex-row items-start gap-6">
+      <div class="hidden lg:block flex-0 min-w-64">
+        <h2 class="text-3xl mb-6">Menu</h2>
+        <ul class="text-xl flex flex-col gap-4">
+          <li><a href="{{ url_for('admin.index') }}" class="link">Dashboard</a></li>
+          <li><a href="{{ url_for('admin.world.index') }}" class="link">Worlds</a></li>
+          <li><a href="{{ url_for('admin.line.index') }}" class="link">Lines</a></li>
+          <li><a href="{{ url_for('admin.station.index') }}" class="link">Stations</a></li>
+        </ul>
+      </div>
+      <div class="flex-1 w-full">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </main>
+
+  <div class="mt-6 bg-base-300 text-base-content">
+    {% include "components/footer.html" %}
+  </div>
+</div>
+
+{{ vite_hmr() }} {{ vite('resources/main.ts') }}
+<script
+    src="https://unpkg.com/htmx.org@2.0.4"
+    integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
+<script type="text/hyperscript">
+  on htmx:responseError
+    put event.detail.xhr.responseText into <#alert-error > div > span />
+    add .visible to #alert-error
+    remove .hidden from #alert-error
+    wait 5s
+    add .hidden to #alert-error
+    remove .visible from #alert-error
+</script>
+</body>
+</html>

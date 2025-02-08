@@ -1,0 +1,16 @@
+<fieldset class="fieldset">
+  <label class="fieldset-label gap-2">
+    {% if field.errors %}
+      {{ field(class_="toggle toggle-error") }}
+      {{ field.label }}
+      <p class="fieldset-label text-error">
+        {% for error in field.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </p>
+    {% else %}
+      {{ field(class_="toggle") }}
+      {{ field.label }}
+    {% endif %}
+  </label>
+</fieldset>

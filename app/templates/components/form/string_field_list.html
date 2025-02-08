@@ -1,0 +1,67 @@
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">{{ field.label }}</legend>
+
+  <div id="{{ field.name }}-field-container" class="flex flex-col gap-2">
+    {% for subfield in field %}
+      <div class="field">
+        {% if subfield.errors %}
+          <div class="flex gap-2">
+            <input type="text" name="{{ subfield.name }}" value="{{ subfield.data }}" class="input input-sm w-full"
+                   placeholder="{{ subfield.description }}">
+            <button type="button" class="btn btn-sm btn-error"
+                    _="on click remove me.closest('.field')">Remove
+            </button>
+          </div>
+          <p class="fieldset-label text-error">
+            {% for error in subfield.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </p>
+        {% else %}
+          <div class="flex gap-2">
+            <input type="text" name="{{ subfield.name }}" value="{{ subfield.data }}" class="input input-sm w-full"
+                   placeholder="{{ subfield.description }}">
+            <button type="button" class="btn btn-sm btn-error"
+                    _="on click remove me.closest('.field')">Remove
+            </button>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div id="{{ field.name }}-new-field" class="field hidden">
+    <div class="flex gap-2">
+      <input type="text" name="" class="input input-sm w-full"
+             placeholder="{{ field.description }}">
+      <button type="button" class="btn btn-sm btn-error"
+              _="on click remove me.closest('.field')">Remove
+      </button>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-sm btn-info w-full md:max-w-48"
+          data-field-name="{{ field.name }}"
+          _="on click
+                set count to #{{ field.name }}-field-container.children.length
+                then make a <div.field/> called newField
+                then set newField's innerHTML to #{{ field.name }}-new-field.innerHTML
+                then set fieldInput to <input/> in newField
+                then set fieldInput's name to getNextFieldName()
+                then put newField at the end of #{{ field.name }}-field-container
+          ">Add Field
+  </button>
+</fieldset>
+
+<script type="text/hyperscript">
+  def getNextFieldName()
+    set fields to <input[name^='{{ field.name }}-']/>
+    set maxN to -1
+    for field in fields
+      set n to field.name.split('-')[1] as Int
+      if n > maxN
+        set maxN to n
+      end
+    end
+    return `{{ field.name }}-${maxN + 1}`
+</script>

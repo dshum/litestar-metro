@@ -1,0 +1,53 @@
+{% extends "admin/layouts/default.html" %}
+
+{% block content %}
+  <h2 class="text-3xl mb-6">Worlds</h2>
+
+  <div class="mb-6">
+    <a href="{{ url_for('admin.world.add') }}" class="btn btn-primary">Create a new world</a>
+  </div>
+
+  {% if worlds %}
+    <div class="overflow-x-auto mb-6 w-full">
+      <table class="table table-zebra w-full">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Order</th>
+          <th>Created at</th>
+          <th>Lines</th>
+          <th class="flex justify-end">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for world in worlds %}
+          <tr>
+            <td><a href="{{ url_for('admin.world.edit', world_id=world.id) }}" class="link">{{ world.name }}</a></td>
+            <td>{{ world.order }}</td>
+            <td>{{ world.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ world.lines|length }}</td>
+            <td class="flex justify-end">
+              <button class="btn btn-circle btn-xs btn-error"
+                      _="on click showModal() the #modal-remove-{{ world.id }}"
+              >
+                {% with class="w-4 h-4" %}
+                  {% include "components/icons/close.html" %}
+                {% endwith %}
+              </button>
+
+              {% with
+                  id="modal-remove-"+world.id|string,
+                  object="world &laquo;"+world.name+"&raquo;?",
+                  url=url_for('admin.world.delete', world_id=world.id) %}
+                {% include "components/confirm_delete.html" %}
+              {% endwith %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>No information available</p>
+  {% endif %}
+{% endblock %}

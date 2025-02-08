@@ -1,0 +1,15 @@
+<form
+    hx-encoding="multipart/form-data"
+    hx-trigger="submit"
+    hx-post="{{ url_for('admin.station.screenshots.create', station_id=station.id) }}"
+    hx-target="this" hx-swap="outerHTML">
+  <div class="w-full">
+    <div class="flex flex-col gap-3">
+      {% include "components/form/form.html" %}
+
+      <fieldset class="fieldset">
+        <button class="btn btn-primary w-full">Save</button>
+      </fieldset>
+    </div>
+  </div>
+</form>

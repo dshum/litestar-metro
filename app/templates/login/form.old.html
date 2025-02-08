@@ -1,0 +1,45 @@
+<form
+    hx-trigger="submit" hx-post="{{ url_for('login') }}"
+    hx-target="this" hx-swap="outerHTML">
+  <div class="w-full sm:max-w-xs flex flex-col gap-4">
+    <div>
+      <label class="input validator {% if form.username.errors %}input-error{% endif %} w-full">
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </g>
+        </svg>
+        <input type="text" name="username" value="{{ form.username.data or "" }}"
+               class="w-full" required placeholder="Login" autocomplete="off"/>
+      </label>
+      <p class="validator-hint hidden">Required field</p>
+      {% if form.username.errors %}
+        <p class="fieldset-label text-xs text-red-400">
+          {% for error in form.username.errors %}
+            {{ error }}<br>
+          {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+
+    <div>
+      <label class="input validator w-full">
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+            <path
+                d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+            <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+          </g>
+        </svg>
+        <input type="password" name="password"
+               class="w-full" required placeholder="Password" autocomplete="off"/>
+      </label>
+      <p class="validator-hint hidden">Required field</p>
+    </div>
+
+    <div>
+      <button class="btn btn-primary w-full">Login</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,17 @@
+{% for field in form %}
+  {% if field.type == "SelectField" %}
+    {% include "components/form/select.html" %}
+  {% elif field.type == "BooleanField" %}
+    {% include "components/form/toggle.html" %}
+  {% elif field.type == "StringFieldList" %}
+    {% include "components/form/string_field_list.html" %}
+  {% elif field.type == "MultiCheckboxField" %}
+    {% include "components/form/multi_checkbox.html" %}
+  {% elif field.type == "FileField" %}
+    {% include "components/form/file.html" %}
+  {% elif field.type == "HiddenField" %}
+    {% include "components/form/hidden.html" %}
+  {% else %}
+    {% include "components/form/input.html" %}
+  {% endif %}
+{% endfor %}

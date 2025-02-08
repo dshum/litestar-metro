@@ -1,0 +1,44 @@
+{% extends "admin/layouts/default.html" %}
+
+{% block content %}
+  <h2 class="text-3xl mb-6">{{ station.name }}</h2>
+
+  <div role="tablist" class="tabs tabs-box mb-6">
+    <a href="{{ url_for('admin.station.view', station_id=station.id) }}" role="tab" class="tab">View</a>
+    <a href="{{ url_for('admin.station.edit', station_id=station.id) }}" role="tab" class="tab">Edit</a>
+    <a href="{{ url_for('admin.station.transfers.edit', station_id=station.id) }}" role="tab" class="tab">Transfers</a>
+    <a href="{{ url_for('admin.station.screenshots.index', station_id=station.id) }}" role="tab" class="tab tab-active">Screenshots</a>
+  </div>
+
+  <div class="grid xl:grid-cols-2 gap-6 mb-6">
+    <div hx-get="{{ url_for('admin.station.screenshots.add.form', station_id=station.id) }}" hx-trigger="load"></div>
+    <div></div>
+  </div>
+
+  {% if screenshots %}
+    <div class="mb-6 grid grid-cols-1 lg:grid-cols-3 gap-4 screenshots">
+      {% for screenshot in screenshots %}
+        <figure class="relative">
+          <button class="btn btn-circle btn-sm btn-error absolute top-2 right-2"
+                  _="on click showModal() the #modal-remove-{{ screenshot.id }}"
+          >
+            {% with class="w-4 h-4" %}
+              {% include "components/icons/close.html" %}
+            {% endwith %}
+          </button>
+          {% with
+                  id="modal-remove-"+screenshot.id|string,
+                  object="file &laquo;"+screenshot.image+"&raquo;?",
+                  url=url_for('admin.screenshot.delete', screenshot_id=screenshot.id),
+                  target="closest figure" %}
+            {% include "components/confirm_delete.html" %}
+          {% endwith %}
+          <img src="{{ url_for('assets', file_path='screenshots/' + screenshot.image) }}"
+               class="w-full shadow" alt="">
+        </figure>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No information available</p>
+  {% endif %}
+{% endblock %}

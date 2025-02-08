@@ -1,0 +1,13 @@
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">{{ field.label }}</legend>
+  {% if field.errors %}
+    {{ field(class_="select select-error w-full") }}
+    <p class="fieldset-label text-error">
+      {% for error in field.errors %}
+        {{ error }}<br>
+      {% endfor %}
+    </p>
+  {% else %}
+    {{ field(class_="select w-full") }}
+  {% endif %}
+</fieldset>

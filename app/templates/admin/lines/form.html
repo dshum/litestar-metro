@@ -1,0 +1,16 @@
+{% set url = url_for('admin.line.update', line_id=line.id) if line else url_for('admin.line.create') %}
+{% set action = "Save" if line else "Add" %}
+
+<form
+    hx-trigger="submit" hx-post="{{ url }}"
+    hx-target="this" hx-swap="outerHTML">
+  <div class="w-full xl:w-1/2 2xl:w-1/3">
+    <div class="flex flex-col gap-2">
+      {% include "components/form/form.html" %}
+
+      <fieldset class="fieldset">
+        <button class="btn btn-primary w-full">{{ action }}</button>
+      </fieldset>
+    </div>
+  </div>
+</form>

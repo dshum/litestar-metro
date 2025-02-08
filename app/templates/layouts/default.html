@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minecraft Metro</title>
+  <link rel="icon" href="{{ url_for('vite', file_path='images/favicon.png') }}" sizes="16x16" type="image/png">
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme") || "light"
+      document.documentElement.setAttribute("data-theme", savedTheme)
+    })()
+  </script>
+</head>
+
+<body class="overflow-y-scroll antialiased">
+<div class="min-h-screen flex flex-col">
+  <div class="container">
+    {% include "components/header.html" %}
+  </div>
+
+  <main class="container flex-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <div class="mt-6 bg-base-300 text-base-content">
+    {% include "components/footer.html" %}
+  </div>
+</div>
+
+{{ vite_hmr() }} {{ vite('resources/main.ts') }}
+<script
+    src="https://unpkg.com/htmx.org@2.0.4"
+    integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+    crossorigin="anonymous"></script>
+</body>
+</html>

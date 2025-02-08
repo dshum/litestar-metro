@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@source "../app/templates";
+
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter/Inter-VariableFont_opsz,wght.ttf");
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Lunasima";
+    src: url("fonts/Lunasima/Lunasima-Regular.ttf");
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "MinecraftTitle";
+    src: url("fonts/minecraft_title_cyrillic.ttf");
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+@theme {
+    --font-sans: "Inter", "sans-serif";
+    --font-title: "Lunasima", "sans-serif";
+    --font-logo: "MinecraftTitle";
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 1rem;
+
+    @variant xl {
+        padding-inline: 0;
+    }
+}
+
+:root:has(
+    :is(
+        .modal-open,
+        .modal:target,
+        .modal-toggle:checked + .modal,
+        .modal[open]
+      )
+  ) {
+    scrollbar-gutter: auto;
+    overflow-y: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply font-title text-primary;
+}
+
+table tbody tr td {
+    @apply align-top;
+}

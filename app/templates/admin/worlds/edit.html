@@ -1,0 +1,7 @@
+{% extends "admin/layouts/default.html" %}
+
+{% block content %}
+  <h2 class="text-3xl mb-6">{{ world.name }}</h2>
+
+  <div hx-get="{{ url_for('admin.world.edit.form', world_id=world.id) }}" hx-trigger="load"></div>
+{% endblock %}

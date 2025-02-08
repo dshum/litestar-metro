@@ -1,0 +1,23 @@
+[project]
+name = "litestar-metro"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    { name = "Denis Shumeev", email = "denis-shumeev@yandex.ru" },
+]
+dependencies = [
+    "litestar[jwt,redis,sqlalchemy,standard]>=2.14.0",
+    "pydantic-settings>=2.7.1",
+    "aiosqlite>=0.20.0",
+    "litestar-vite>=0.13.0",
+    "wtforms>=3.2.1",
+    "passlib[argon2]>=1.7.4",
+    "pillow>=11.1.0",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = { text = "MIT" }
+
+
+[tool.pdm]
+distribution = false

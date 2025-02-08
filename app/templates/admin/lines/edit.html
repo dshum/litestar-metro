@@ -1,0 +1,7 @@
+{% extends "admin/layouts/default.html" %}
+
+{% block content %}
+  <h2 class="text-3xl mb-6">{{ line.name }}</h2>
+
+  <div hx-get="{{ url_for('admin.line.edit.form', line_id=line.id) }}" hx-trigger="load"></div>
+{% endblock %}

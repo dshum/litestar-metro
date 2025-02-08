@@ -1,0 +1,7 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+  <h2 class="text-3xl mb-6">Sign in</h2>
+
+  <div hx-get="{{ url_for('signin.form') }}" hx-trigger="load"></div>
+{% endblock %}
