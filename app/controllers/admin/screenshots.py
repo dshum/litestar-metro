@@ -91,7 +91,7 @@ class StationScreenshotsController(Controller):
         return HTMXTemplate(template_name="admin/stations/screenshots/form.html",
                             context={"station": station, "form": form})
 
-    @post("/{screenshot_id:uuid}/delete", name="admin.screenshot.delete")
+    @post("/{screenshot_id:uuid}/screenshots/delete", name="admin.screenshot.delete")
     async def delete(self, screenshot_service: ScreenshotService, screenshot_id: UUID) -> None:
         screenshot = await screenshot_service.get(screenshot_id)
         await self.delete_file(screenshot.image)

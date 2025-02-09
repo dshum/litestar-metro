@@ -38,7 +38,8 @@
               {% with
                   id="modal-remove-"+world.id|string,
                   object="world &laquo;"+world.name+"&raquo;?",
-                  url=url_for('admin.world.delete', world_id=world.id) %}
+                  url=url_for('admin.world.delete', world_id=world.id),
+                  target="closest tr" %}
                 {% include "components/confirm_delete.html" %}
               {% endwith %}
             </td>

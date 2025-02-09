@@ -20,12 +20,12 @@ class LoginForm(Form):
 
 class WorldForm(Form):
     name = StringField("Name", [InputRequired()])
-    order = IntegerField("Order", [InputRequired()], widget=NumberInput(min=0, step=1))
+    order = IntegerField("Order", [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
 
 
 class LineForm(Form):
     name = StringField("Name", [InputRequired()])
-    order = IntegerField("Order", [InputRequired()], widget=NumberInput(min=0, step=1))
+    order = IntegerField("Order", [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
     world_id = SelectField("World", [InputRequired()])
 
 
@@ -46,7 +46,7 @@ class MultiCheckboxField(SelectMultipleField):
 
 class StationForm(Form):
     name = StringField("Name", [InputRequired()])
-    order = IntegerField("Order", [InputRequired()], widget=NumberInput(min=0, step=1))
+    order = IntegerField("Order", [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
     line_id = SelectField("Line", [InputRequired()])
     platform_length = IntegerField("Platform length", widget=NumberInput(min=0, step=1))
     platform_square = IntegerField("Platform area", widget=NumberInput(min=0, step=1))

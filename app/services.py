@@ -1,12 +1,32 @@
 from uuid import UUID
 
-from advanced_alchemy.repository import SQLAlchemyAsyncRepository
+from advanced_alchemy.repository import SQLAlchemyAsyncRepository, ModelT
 from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService, is_dict_with_field, ModelDictT, is_dict
 from litestar.exceptions import PermissionDeniedException
 from sqlalchemy import func, select
 
 from app.lib import crypt
 from app.models import Line, Station, User, World, Material, Screenshot
+
+
+class OrderableService(SQLAlchemyAsyncRepositoryService[ModelT]):
+    async def _get_next_order(self):
+        model = self.repository.model_type
+        max_order = await self.repository.session.scalar(select(func.max(model.order)))
+        return max_order + 1 if max_order is not None else 0
+
+    async def _populate_order(self, data: ModelDictT[ModelT]) -> ModelDictT[ModelT]:
+        if is_dict(data):
+            data = await self.to_model(data)
+        if not data.order:
+            data.order = await self._get_next_order()
+        return data
+
+    async def to_model_on_create(self, data: ModelDictT[ModelT]) -> ModelDictT[ModelT]:
+        return await self._populate_order(data)
+
+    async def to_model_on_update(self, data: ModelDictT[ModelT]) -> ModelDictT[ModelT]:
+        return await self._populate_order(data)
 
 
 class UserService(SQLAlchemyAsyncRepositoryService[User]):
@@ -33,21 +53,21 @@ class UserService(SQLAlchemyAsyncRepositoryService[User]):
         return await super().to_model(data, operation)
 
 
-class WorldService(SQLAlchemyAsyncRepositoryService[World]):
+class WorldService(OrderableService[World]):
     class WorldRepository(SQLAlchemyAsyncRepository[World]):
         model_type = World
 
     repository_type = WorldRepository
 
 
-class LineService(SQLAlchemyAsyncRepositoryService[Line]):
+class LineService(OrderableService[Line]):
     class LineRepository(SQLAlchemyAsyncRepository[Line]):
         model_type = Line
 
     repository_type = LineRepository
 
 
-class StationService(SQLAlchemyAsyncRepositoryService[Station]):
+class StationService(OrderableService[Station]):
     class StationRepository(SQLAlchemyAsyncRepository[Station]):
         uniquify = True
         model_type = Station
@@ -55,10 +75,12 @@ class StationService(SQLAlchemyAsyncRepositoryService[Station]):
     repository_type = StationRepository
 
     async def to_model_on_create(self, data: ModelDictT[Station]) -> ModelDictT[Station]:
-        return await self._add_relations_to_station(data)
+        data = await self._add_relations_to_station(data)
+        return await super().to_model_on_update(data)
 
     async def to_model_on_update(self, data: ModelDictT[Station]) -> ModelDictT[Station]:
-        return await self._add_relations_to_station(data)
+        data = await self._add_relations_to_station(data)
+        return await super().to_model_on_update(data)
 
     async def _add_relations_to_station(self, data: ModelDictT[Station]) -> ModelDictT[Station]:
         if is_dict(data):
@@ -76,25 +98,8 @@ class StationService(SQLAlchemyAsyncRepositoryService[Station]):
         return data
 
 
-class ScreenshotService(SQLAlchemyAsyncRepositoryService[Screenshot]):
+class ScreenshotService(OrderableService[Screenshot]):
     class ScreenshotRepository(SQLAlchemyAsyncRepository[Screenshot]):
         model_type = Screenshot
 
     repository_type = ScreenshotRepository
-
-    async def _get_next_order(self):
-        max_order = await self.repository.session.scalar(select(func.max(Screenshot.order)))
-        return max_order + 1 if max_order is not None else 0
-
-    async def _populate_order(self, data: ModelDictT[Screenshot]) -> ModelDictT[Screenshot]:
-        if is_dict(data):
-            data = await self.to_model(data)
-            if not data.order:
-                data.order = await self._get_next_order()
-        return data
-
-    async def to_model_on_create(self, data: ModelDictT[Screenshot]) -> ModelDictT[Screenshot]:
-        return await self._populate_order(data)
-
-    async def to_model_on_update(self, data: ModelDictT[Screenshot]) -> ModelDictT[Screenshot]:
-        return await self._populate_order(data)
