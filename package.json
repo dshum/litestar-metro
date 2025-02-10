@@ -18,6 +18,7 @@
         "htmx.org": "^2.0.4",
         "litestar-vite-plugin": "^0.13.0",
         "typescript": "^5.7.2",
-        "vite": "^6.0.6"
+        "vite": "^6.0.6",
+        "vite-plugin-static-copy": "^2.2.0"
     }
 }

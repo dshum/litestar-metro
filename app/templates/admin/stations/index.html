@@ -65,7 +65,7 @@
                   object="station &laquo;"+station.name+"&raquo;?",
                   url=url_for('admin.station.delete', station_id=station.id),
                   target="closest tr" %}
-                {% include "components/confirm_delete.html" %}
+                {% include "admin/components/confirm_delete.html" %}
               {% endwith %}
             </td>
           </tr>

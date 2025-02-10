@@ -31,7 +31,7 @@
                   object="file &laquo;"+screenshot.image+"&raquo;?",
                   url=url_for('admin.screenshot.delete', screenshot_id=screenshot.id),
                   target="closest figure" %}
-            {% include "components/confirm_delete.html" %}
+            {% include "admin/components/confirm_delete.html" %}
           {% endwith %}
           <img src="{{ url_for('assets', file_path='screenshots/' + screenshot.image) }}"
                class="w-full shadow" alt="">

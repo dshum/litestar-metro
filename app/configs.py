@@ -70,5 +70,8 @@ vite_static_files_config = StaticFilesConfig(
     cache_control=CacheControlHeader(max_age=3600),
 )
 
-assets_path = Path(__file__).resolve().parent.parent / "storage" / "assets"
-sessions_path = Path(__file__).resolve().parent.parent / "storage" / "sessions"
+storage_path = Path(__file__).resolve().parent.parent / "storage"
+assets_path = storage_path / "assets"
+screenshots_path = assets_path / "screenshots"
+data_path = storage_path / "data"
+sessions_path = storage_path / "sessions"

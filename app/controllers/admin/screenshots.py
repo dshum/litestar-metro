@@ -16,7 +16,7 @@ from litestar.response import Template
 from litestar_htmx import HTMXTemplate, HTMXRequest, ClientRefresh
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.configs import logging_config, assets_path
+from app.configs import logging_config, screenshots_path
 from app.dependencies import provide_station_service, provide_screenshot_service
 from app.forms import StationScreenshotForm, FileValidationException
 from app.services import StationService, ScreenshotService
@@ -108,7 +108,7 @@ class StationScreenshotsController(Controller):
         postfix = str(uuid4())
         extension = file.filename.rsplit(".", 1)[-1]
         filename = f"{filename_base}-{postfix}.{extension}"
-        filepath = assets_path / "screenshots" / filename
+        filepath = screenshots_path / filename
         image = Image.open(BytesIO(content))
         image.thumbnail(size=(800, 600))
         buf = BytesIO()
@@ -119,6 +119,6 @@ class StationScreenshotsController(Controller):
 
     @staticmethod
     async def delete_file(filename: str):
-        filepath = Path(assets_path / "screenshots" / filename)
+        filepath = Path(screenshots_path / filename)
         if await filepath.exists():
             await filepath.unlink()

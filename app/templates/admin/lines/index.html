@@ -30,7 +30,7 @@
             <td>{{ line.stations|length }}</td>
             <td class="flex justify-end">
               <button class="btn btn-circle btn-xs btn-error"
-                      _="on click showModal() the #modal-remove-{{ line.id }}"
+                      _="on click showModal() the #modal-remove-{{ line.id|string }}"
               >
                 {% with class="w-4 h-4" %}
                   {% include "components/icons/close.html" %}
@@ -42,7 +42,7 @@
                   object="line &laquo;"+line.name+"&raquo;?",
                   url=url_for('admin.line.delete', line_id=line.id),
                   target="closest tr" %}
-                {% include "components/confirm_delete.html" %}
+                {% include "admin/components/confirm_delete.html" %}
               {% endwith %}
             </td>
           </tr>

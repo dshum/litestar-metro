@@ -1,9 +1,9 @@
 from litestar import Litestar
-from litestar.plugins.flash import FlashPlugin
 
 
 def create_app() -> Litestar:
     from advanced_alchemy.extensions.litestar import SQLAlchemyPlugin
+    from litestar.config.app import AppConfig
     from litestar.datastructures import CacheControlHeader
     from litestar.di import Provide
     from litestar.exceptions import (
@@ -12,6 +12,7 @@ def create_app() -> Litestar:
         NotFoundException,
         ValidationException,
     )
+    from litestar.plugins.flash import FlashPlugin
     from litestar.static_files import create_static_files_router
     from litestar.stores.file import FileStore
     from litestar_htmx import HTMXRequest
@@ -27,6 +28,8 @@ def create_app() -> Litestar:
         vite_config,
         vite_static_files_config,
         assets_path,
+        data_path,
+        screenshots_path,
         sessions_path,
     )
     from app.controllers import app_router
@@ -42,6 +45,11 @@ def create_app() -> Litestar:
     from app.guards import session_auth
     from app.plugins import CLIPlugin
 
+    def create_folders(app_config: AppConfig) -> AppConfig:
+        for path in [assets_path, screenshots_path, data_path, sessions_path]:
+            path.mkdir(parents=True, exist_ok=True)
+        return app_config
+
     return Litestar(
         route_handlers=[
             app_router,
@@ -55,7 +63,6 @@ def create_app() -> Litestar:
         ],
         dependencies={
             "limit_offset": Provide(provide_limit_offset_pagination),
-            # "current_user": Provide(provide_current_user)
         },
         plugins=[
             CLIPlugin(),
@@ -66,7 +73,7 @@ def create_app() -> Litestar:
                 static_files_config=vite_static_files_config,
             ),
         ],
-        on_app_init=[session_auth.on_app_init],
+        on_app_init=[session_auth.on_app_init, create_folders],
         middleware=[session_auth.middleware],
         logging_config=logging_config,
         request_class=HTMXRequest,

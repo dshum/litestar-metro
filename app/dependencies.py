@@ -1,11 +1,10 @@
 from advanced_alchemy.filters import LimitOffset
-from litestar import Request
 from litestar.params import Parameter
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import Line, Station, World, Screenshot
-from app.services import LineService, StationService, UserService, User, WorldService, ScreenshotService
+from app.services import LineService, StationService, UserService, WorldService, ScreenshotService
 
 
 async def provide_limit_offset_pagination(
@@ -13,10 +12,6 @@ async def provide_limit_offset_pagination(
         limit: int = Parameter(query="limit", ge=1, le=100, default=10, required=False),
 ) -> LimitOffset:
     return LimitOffset(limit, offset)
-
-
-async def provide_current_user(request: Request) -> User:
-    return request.user
 
 
 async def provide_user_service(db_session: AsyncSession) -> UserService:

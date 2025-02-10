@@ -1,7 +1,7 @@
 import {defineConfig} from "vite"
 import litestar from "litestar-vite-plugin"
 import tailwindcss from "@tailwindcss/vite"
-import inject from "@rollup/plugin-inject"
+import {viteStaticCopy} from "vite-plugin-static-copy"
 
 const ASSET_URL = process.env.ASSET_URL || "/static/"
 const VITE_PORT = process.env.VITE_PORT || "5173"
@@ -29,6 +29,14 @@ export default defineConfig({
       hotFile: "public/hot"
     }),
     tailwindcss(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "resources/images",
+          dest: ""
+        }
+      ]
+    }),
   ],
   resolve: {
     alias: {
@@ -36,6 +44,6 @@ export default defineConfig({
     },
   },
   build: {
-    emptyOutDir: false,
+    emptyOutDir: true,
   },
 })
