@@ -27,7 +27,7 @@ WORKDIR /workspace
 # Copy only necessary artifacts from the builder stage
 COPY --from=builder /workspace/.venv /workspace/.venv
 COPY --from=builder /workspace/app /workspace/app
-COPY --from=builder /workspace/babel.cfg /workspace/messages.pot /workspace/app/
+COPY --from=builder /workspace/babel.cfg /workspace/messages.pot /workspace/
 
 # Set environment variables
 ENV PATH="/workspace/.venv/bin:$PATH"
