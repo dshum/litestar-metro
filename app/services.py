@@ -19,7 +19,7 @@ class OrderableService(SQLAlchemyAsyncRepositoryService[ModelT]):
     async def _populate_order(self, data: ModelDictT[ModelT]) -> ModelDictT[ModelT]:
         if is_dict(data):
             data = await self.to_model(data)
-        if not data.order:
+        if data.order is None:
             data.order = await self._get_next_order()
         return data
 
