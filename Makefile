@@ -2,7 +2,9 @@ include .env
 
 APP_PORT := $(or $(APP_PORT), 8000)
 
-# run application
+# application
+install-assets:
+	pdm run litestar --app=app.main:app assets install
 dev:
 	pdm run litestar --app=app.main:app run --port=$(APP_PORT) --reload
 run:
