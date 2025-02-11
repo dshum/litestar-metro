@@ -12,10 +12,10 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.honeytrap.rule=Host(`metro.pffft.ru`)"
-      - "traefik.http.routers.honeytrap.entrypoints=websecure"
-      - "traefik.http.routers.honeytrap.tls.certresolver=myresolver"
-      - "traefik.http.services.honeytrap.loadbalancer.server.port=8000"
+      - "traefik.http.routers.metro.rule=Host(`metro.pffft.ru`)"
+      - "traefik.http.routers.metro.entrypoints=websecure"
+      - "traefik.http.routers.metro.tls.certresolver=myresolver"
+      - "traefik.http.services.metro.loadbalancer.server.port=8000"
 
 networks:
   traefik_proxy:

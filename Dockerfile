@@ -8,7 +8,7 @@ RUN pip install pdm
 WORKDIR /workspace
 
 # Copy only dependency files first
-COPY pyproject.toml pdm.lock* ./
+COPY pyproject.toml pdm.lock* babel.cfg messages.pot ./
 
 # Create a virtual environment and install dependencies
 RUN pdm venv create && \
