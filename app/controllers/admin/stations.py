@@ -10,7 +10,7 @@ from litestar.plugins.flash import flash
 from litestar.response import Template
 from litestar_htmx import HTMXTemplate, ClientRefresh, ClientRedirect
 
-from app.configs import logging_config
+from app.configs import logging_config, _
 from app.dependencies import provide_station_service, provide_line_service
 from app.forms import StationForm
 from app.models import Station
@@ -73,7 +73,7 @@ class StationController(Controller):
         form.line_id.choices = [(line.id, line.name) for line in lines]
         if form.validate():
             await station_service.create(data=form.data)
-            flash(request, "Station has been successfully created!", category="success")
+            flash(request, _("Station has been successfully created!"), category="success")
             path = request.app.route_reverse("admin.station.index")
             return ClientRedirect(path)
         return HTMXTemplate(template_name="admin/stations/form.html", context={"form": form})
@@ -112,11 +112,9 @@ class StationController(Controller):
         form = StationForm(formdata=MultiDict(data))
         lines = await line_service.list()
         form.line_id.choices = [(line.id, line.name) for line in lines]
-        # transfers = await station_service.list(Station.id != station.id)
-        # form.transfers.choices = [(transfer.id, transfer.name) for transfer in transfers]
         if form.validate():
             await station_service.update(data=form.data, item_id=station.id)
-            flash(request, "Station has been successfully updated!", category="success")
+            flash(request, _("Station has been successfully updated!"), category="success")
             return ClientRefresh()
         return HTMXTemplate(template_name="admin/stations/form.html", context={"station": station, "form": form})
 

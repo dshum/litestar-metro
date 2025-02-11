@@ -10,7 +10,7 @@ from litestar.plugins.flash import flash
 from litestar.response import Template
 from litestar_htmx import HTMXTemplate, ClientRefresh
 
-from app.configs import logging_config
+from app.configs import logging_config, _
 from app.dependencies import provide_station_service
 from app.forms import StationTransfersForm
 from app.models import Station
@@ -63,7 +63,7 @@ class StationTransfersController(Controller):
         form.transfers.choices = [(transfer.id, transfer.name) for transfer in transfers]
         if form.validate():
             await station_service.update(data=form.data, item_id=station.id)
-            flash(request, "Transfers have been successfully updated!", category="success")
+            flash(request, _("Transfers have been successfully updated!"), category="success")
             return ClientRefresh()
         return HTMXTemplate(template_name="admin/stations/transfers/form.html",
                             context={"station": station, "form": form})

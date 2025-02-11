@@ -1,5 +1,5 @@
 {% set url = url_for('admin.world.update', world_id=world.id) if world else url_for('admin.world.create') %}
-{% set action = "Save" if world else "Add" %}
+{% set action = _("Save") if world else _("Add") %}
 
 <form
     hx-trigger="submit" hx-post="{{ url }}"

@@ -4,45 +4,47 @@
   <h2 class="text-3xl mb-6">{{ station.name }}</h2>
 
   <div role="tablist" class="tabs tabs-box mb-6">
-    <a href="{{ url_for('admin.station.view', station_id=station.id) }}" role="tab" class="tab tab-active">View</a>
-    <a href="{{ url_for('admin.station.edit', station_id=station.id) }}" role="tab" class="tab">Edit</a>
-    <a href="{{ url_for('admin.station.transfers.edit', station_id=station.id) }}" role="tab" class="tab">Transfers</a>
+    <a href="{{ url_for('admin.station.view', station_id=station.id) }}" role="tab"
+       class="tab tab-active">{{ _("View") }}</a>
+    <a href="{{ url_for('admin.station.edit', station_id=station.id) }}" role="tab" class="tab">{{ _("Edit") }}</a>
+    <a href="{{ url_for('admin.station.transfers.edit', station_id=station.id) }}" role="tab"
+       class="tab">{{ _("Transfers") }}</a>
     <a href="{{ url_for('admin.station.screenshots.index', station_id=station.id) }}" role="tab"
-       class="tab">Screenshots</a>
+       class="tab">{{ _("Screenshots") }}</a>
   </div>
 
   <div class="mb-6 flex flex-col lg:flex-row items-top lg:justify-between gap-4">
     <div>
-      <h3 class="text-xl">Transfers</h3>
+      <h3 class="text-xl">{{ _("Transfers") }}</h3>
       {% if transfers %}
         <ul>
           {% for transfer in transfers %}
-            <li>{{ transfer.name }} ({{ transfer.line.name }} line)</li>
+            <li>{{ transfer.name }} ({{ transfer.line.name }} {{ _("line") }})</li>
           {% endfor %}
         </ul>
       {% else %}
-        <p>No transfers here</p>
+        <p>{{ _("No transfers here") }}</p>
       {% endif %}
     </div>
 
     <div class="stats stats-vertical lg:stats-horizontal bg-base-300 shadow">
       <div class="stat">
-        <div class="stat-title">Platform length</div>
+        <div class="stat-title">{{ _("Platform length") }}</div>
         <div class="stat-value">{{ station.platform_length }}</div>
       </div>
 
       <div class="stat">
-        <div class="stat-title">Platform area</div>
+        <div class="stat-title">{{ _("Platform area") }}</div>
         <div class="stat-value">{{ station.platform_square }}</div>
       </div>
 
       <div class="stat">
-        <div class="stat-title">Platform number</div>
+        <div class="stat-title">{{ _("Platform number") }}</div>
         <div class="stat-value">{{ station.platform_number }}</div>
       </div>
 
       <div class="stat">
-        <div class="stat-title">Entrance number</div>
+        <div class="stat-title">{{ _("Entrance number") }}</div>
         <div class="stat-value">{{ station.entrance_number }}</div>
       </div>
     </div>
@@ -60,7 +62,7 @@
   {% endif %}
 
   <div class="mb-6">
-    <h3 class="mb-2 text-xl">Materials</h3>
+    <h3 class="mb-2 text-xl">{{ _("Materials") }}</h3>
     {% if materials %}
       <div>
         {% for material in materials %}
@@ -69,26 +71,26 @@
         {% endfor %}
       </div>
     {% else %}
-      <div>Materials are not specified</div>
+      <div>{{ _("Materials are not specified") }}</div>
     {% endif %}
   </div>
 
   {% set extra_titles = {
-    "has_depot": "Station has depot",
-    "is_underground": "Underground station",
-    "has_elevators": "Station has elevators",
-    "is_terminal": "Terminal station",
+    "has_depot": _("Station has depot"),
+    "is_underground": _("Underground station"),
+    "has_elevators": _("Station has elevators"),
+    "is_terminal": _("Terminal station"),
   } %}
 
   <div class="mb-6">
-    <h3 class="mb-2 text-xl">Additional</h3>
+    <h3 class="mb-2 text-xl">{{ _("Additional") }}</h3>
     {% if extras %}
       {% for extra in extras %}
         {{ extra_titles[extra] }}
         {% if not loop.last %}<span class="text-purple-400">✦</span>{% endif %}
       {% endfor %}
     {% else %}
-      <div>No information available</div>
+      <div>{{ _("No information available") }}</div>
     {% endif %}
   </div>
 {% endblock %}

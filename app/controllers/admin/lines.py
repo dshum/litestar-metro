@@ -10,6 +10,7 @@ from litestar.plugins.flash import flash
 from litestar.response import Template
 from litestar_htmx import HTMXTemplate, ClientRefresh, ClientRedirect
 
+from app.configs import _
 from app.dependencies import provide_line_service, provide_world_service
 from app.forms import LineForm
 from app.services import LineService, WorldService
@@ -51,7 +52,7 @@ class LineController(Controller):
         form.world_id.choices = [(world.id, world.name) for world in worlds]
         if form.validate():
             await line_service.create(data=form.data)
-            flash(request, "Line has been successfully created!", category="success")
+            flash(request, _("Line has been successfully created!"), category="success")
             path = request.app.route_reverse("admin.line.index")
             return ClientRedirect(path)
         return HTMXTemplate(template_name="admin/lines/form.html", context={"form": form})
@@ -89,7 +90,7 @@ class LineController(Controller):
         form.world_id.choices = [(world.id, world.name) for world in worlds]
         if form.validate():
             await line_service.update(data=form.data, item_id=line.id)
-            flash(request, "Line has been successfully updated!", category="success")
+            flash(request, _("Line has been successfully updated!"), category="success")
             return ClientRefresh()
         return HTMXTemplate(template_name="admin/lines/form.html", context={"line": line, "form": form})
 

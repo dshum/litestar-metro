@@ -5,6 +5,7 @@ from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService, is_dict_w
 from litestar.exceptions import PermissionDeniedException
 from sqlalchemy import func, select
 
+from app.configs import _
 from app.lib import crypt
 from app.models import Line, Station, User, World, Material, Screenshot
 
@@ -38,11 +39,11 @@ class UserService(SQLAlchemyAsyncRepositoryService[User]):
     async def authenticate(self, username: str, password: bytes | str) -> User:
         user = await self.get_one_or_none(username=username)
         if user is None:
-            raise PermissionDeniedException(detail="Incorrect username or password")
+            raise PermissionDeniedException(detail=_("Incorrect username or password"))
         if not await crypt.verify_password(password, user.hashed_password):
-            raise PermissionDeniedException(detail="User not found or password invalid")
+            raise PermissionDeniedException(detail=_("Incorrect username or password"))
         if not user.is_active:
-            raise PermissionDeniedException(detail="User is inactive")
+            raise PermissionDeniedException(detail=_("User is inactive"))
         return user
 
     async def to_model(self, data: ModelDictT[User], operation: str | None = None) -> User:

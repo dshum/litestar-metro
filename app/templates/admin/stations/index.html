@@ -1,10 +1,10 @@
 {% extends "admin/layouts/default.html" %}
 
 {% block content %}
-  <h2 class="text-3xl mb-6">Stations</h2>
+  <h2 class="text-3xl mb-6">{{ _("Stations") }}</h2>
 
   <div class="mb-6">
-    <a href="{{ url_for('admin.station.add') }}" class="btn btn-primary">Create a new station</a>
+    <a href="{{ url_for('admin.station.add') }}" class="btn btn-primary">{{ _("Create a new station") }}</a>
   </div>
 
   {% if stations %}
@@ -12,14 +12,14 @@
       <table class="table table-zebra w-full">
         <thead>
         <tr>
-          <th>Name</th>
-          <th>Line</th>
-          <th>World</th>
-          <th>Order</th>
-          <th>Transfers</th>
-          <th>Screenshots</th>
-          <th>Created at</th>
-          <th class="flex justify-end">Remove</th>
+          <th>{{ _("Name") }}</th>
+          <th>{{ _("Line") }}</th>
+          <th>{{ _("World") }}</th>
+          <th>{{ _("Order") }}</th>
+          <th>{{ _("Transfers") }}</th>
+          <th>{{ _("Screenshots") }}</th>
+          <th>{{ _("Created at") }}</th>
+          <th class="flex justify-end">{{ _("Remove") }}</th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
                 {% set transfers = station.transfers %}
                 {% if transfers %}
                   {% for transfer in transfers %}
-                    <div>{{ transfer.name }}, {{ transfer.line.name }} line</div>
+                    <div>{{ transfer.name }}, {{ transfer.line.name }} {{ _("line") }}</div>
                   {% endfor %}
                 {% else %}
                   Add
@@ -62,7 +62,7 @@
 
               {% with
                   id="modal-remove-"+station.id|string,
-                  object="station &laquo;"+station.name+"&raquo;?",
+                  object=_("remove the station")+" &laquo;"+station.name+"&raquo;?",
                   url=url_for('admin.station.delete', station_id=station.id),
                   target="closest tr" %}
                 {% include "admin/components/confirm_delete.html" %}
@@ -74,6 +74,6 @@
       </table>
     </div>
   {% else %}
-    <p>No information available</p>
+    <p>{{ _("No information available") }}</p>
   {% endif %}
 {% endblock %}

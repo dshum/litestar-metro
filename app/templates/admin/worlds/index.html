@@ -1,10 +1,10 @@
 {% extends "admin/layouts/default.html" %}
 
 {% block content %}
-  <h2 class="text-3xl mb-6">Worlds</h2>
+  <h2 class="text-3xl mb-6">{{ _("Worlds") }}</h2>
 
   <div class="mb-6">
-    <a href="{{ url_for('admin.world.add') }}" class="btn btn-primary">Create a new world</a>
+    <a href="{{ url_for('admin.world.add') }}" class="btn btn-primary">{{ _("Create a new world") }}</a>
   </div>
 
   {% if worlds %}
@@ -12,11 +12,11 @@
       <table class="table table-zebra w-full">
         <thead>
         <tr>
-          <th>Name</th>
-          <th>Order</th>
-          <th>Created at</th>
-          <th>Lines</th>
-          <th class="flex justify-end">Remove</th>
+          <th>{{ _("Name") }}</th>
+          <th>{{ _("Order") }}</th>
+          <th>{{ _("Created at") }}</th>
+          <th>{{ _("Lines") }}</th>
+          <th class="flex justify-end">{{ _("Remove") }}</th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
 
               {% with
                   id="modal-remove-"+world.id|string,
-                  object="world &laquo;"+world.name+"&raquo;?",
+                  object=_("remove the world")+" &laquo;"+world.name+"&raquo;?",
                   url=url_for('admin.world.delete', world_id=world.id),
                   target="closest tr" %}
                 {% include "admin/components/confirm_delete.html" %}
@@ -49,6 +49,6 @@
       </table>
     </div>
   {% else %}
-    <p>No information available</p>
+    <p>{{ _("No information available") }}</p>
   {% endif %}
 {% endblock %}

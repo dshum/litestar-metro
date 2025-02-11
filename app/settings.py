@@ -14,6 +14,7 @@ class AppSettings(BaseSettings):
 
     DEBUG: bool = False
     REQUEST_MAX_BODY_SIZE: int = 10_000_000
+    DEFAULT_LOCALE: str = "en_US"
 
 
 class DatabaseSettings(BaseSettings):

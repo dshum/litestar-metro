@@ -1,10 +1,10 @@
 {% extends "admin/layouts/default.html" %}
 
 {% block content %}
-  <h2 class="text-3xl mb-6">Lines</h2>
+  <h2 class="text-3xl mb-6">{{ _("Lines") }}</h2>
 
   <div class="mb-6">
-    <a href="{{ url_for('admin.line.add') }}" class="btn btn-primary">Create a new line</a>
+    <a href="{{ url_for('admin.line.add') }}" class="btn btn-primary">{{ _("Create a new line") }}</a>
   </div>
 
   {% if lines %}
@@ -12,12 +12,12 @@
       <table class="table table-zebra w-full">
         <thead>
         <tr>
-          <th>Name</th>
-          <th>World</th>
-          <th>Order</th>
-          <th>Created at</th>
-          <th>Stations</th>
-          <th class="flex justify-end">Remove</th>
+          <th>{{ _("Name") }}</th>
+          <th>{{ _("World") }}</th>
+          <th>{{ _("Order") }}</th>
+          <th>{{ _("Created at") }}</th>
+          <th>{{ _("Stations") }}</th>
+          <th class="flex justify-end">{{ _("Remove") }}</th>
         </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@
 
               {% with
                   id="modal-remove-"+line.id|string,
-                  object="line &laquo;"+line.name+"&raquo;?",
+                  object=_("remove the line")+" &laquo;"+line.name+"&raquo;?",
                   url=url_for('admin.line.delete', line_id=line.id),
                   target="closest tr" %}
                 {% include "admin/components/confirm_delete.html" %}
@@ -51,6 +51,6 @@
       </table>
     </div>
   {% else %}
-    <p>No information available</p>
+    <p>{{ _("No information available") }}</p>
   {% endif %}
 {% endblock %}

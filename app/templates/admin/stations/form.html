@@ -1,5 +1,5 @@
 {% set url = url_for('admin.station.update', station_id=station.id) if station else url_for('admin.station.create') %}
-{% set action = "Save" if station else "Add" %}
+{% set action = _("Save") if station else _("Add") %}
 
 <form
     hx-trigger="submit" hx-post="{{ url }}"

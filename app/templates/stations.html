@@ -1,7 +1,7 @@
 {% extends "layouts/default.html" %}
 
 {% block content %}
-  <h2 class="text-3xl mb-6">All stations</h2>
+  <h2 class="text-3xl mb-6">{{ _("All station") }}s</h2>
 
   {% if stations %}
     <ul class="flex flex-col gap-4">
@@ -10,11 +10,11 @@
           <div class="text-xl">
             <a href="{{ url_for('station', station_id=station.id) }}" class="link">{{ station.name }}</a>
           </div>
-          <div>{{ station.line.name }} line, {{ station.line.world.name }}</div>
+          <div>{{ station.line.name }} {{ _("line") }}, {{ station.line.world.name }}</div>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>No information available</p>
+    <p>{{ _("No information available") }}</p>
   {% endif %}
 {% endblock %}

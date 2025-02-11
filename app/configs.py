@@ -1,6 +1,8 @@
+import gettext
 from pathlib import Path
 
 from advanced_alchemy.extensions.litestar import SQLAlchemyAsyncConfig
+from jinja2 import Environment, FileSystemLoader
 from litestar.config.compression import CompressionConfig
 from litestar.contrib.jinja import JinjaTemplateEngine
 from litestar.datastructures import CacheControlHeader
@@ -14,6 +16,29 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from app import settings
 from app.models import Base
 
+__all__ = [
+    "assets_path",
+    "screenshots_path",
+    "data_path",
+    "sessions_path",
+    "sqlalchemy_config",
+    "template_config",
+    "flush_config",
+    "logging_config",
+    "compression_config",
+    "vite_config",
+    "vite_static_files_config",
+    "translation",
+    "_",
+]
+
+translations_path = Path(__file__).resolve().parent / "translations"
+storage_path = Path(__file__).resolve().parent.parent / "storage"
+assets_path = storage_path / "assets"
+screenshots_path = assets_path / "screenshots"
+data_path = storage_path / "data"
+sessions_path = storage_path / "sessions"
+
 engine = create_async_engine(
     url=settings.db.URL,
     echo=settings.db.ECHO,
@@ -26,9 +51,20 @@ sqlalchemy_config = SQLAlchemyAsyncConfig(
     engine_instance=engine,
 )
 
+translation = gettext.translation(
+    "messages",
+    localedir=translations_path,
+    languages=[settings.app.DEFAULT_LOCALE],
+)
+_ = translation.gettext
+
+env = Environment(loader=FileSystemLoader(Path(__file__).parent / "templates"))
+env.newstyle_gettext = True
+env.globals["gettext"] = translation.gettext
+env.globals["_"] = translation.gettext
 template_config = TemplateConfig(
     directory=Path(__file__).parent / "templates",
-    engine=JinjaTemplateEngine,
+    engine=JinjaTemplateEngine.from_environment(env),
 )
 
 flush_config = FlashConfig(template_config=template_config)
@@ -69,9 +105,3 @@ vite_config = ViteConfig(
 vite_static_files_config = StaticFilesConfig(
     cache_control=CacheControlHeader(max_age=3600),
 )
-
-storage_path = Path(__file__).resolve().parent.parent / "storage"
-assets_path = storage_path / "assets"
-screenshots_path = assets_path / "screenshots"
-data_path = storage_path / "data"
-sessions_path = storage_path / "sessions"

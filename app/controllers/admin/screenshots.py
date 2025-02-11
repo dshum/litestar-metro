@@ -16,7 +16,7 @@ from litestar.response import Template
 from litestar_htmx import HTMXTemplate, HTMXRequest, ClientRefresh
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.configs import logging_config, screenshots_path
+from app.configs import logging_config, screenshots_path, _
 from app.dependencies import provide_station_service, provide_screenshot_service
 from app.forms import StationScreenshotForm, FileValidationException
 from app.services import StationService, ScreenshotService
@@ -84,7 +84,7 @@ class StationScreenshotsController(Controller):
                 screenshot_data.update(image=filename)
                 screenshot_data.update(station_id=station_id)
                 await screenshot_service.create(data=screenshot_data)
-                flash(request, "Screenshot has been successfully uploaded!", category="success")
+                flash(request, _("Screenshot has been successfully uploaded!"), category="success")
                 return ClientRefresh()
             except FileValidationException as e:
                 form.image.errors.append(e.message)
@@ -100,10 +100,10 @@ class StationScreenshotsController(Controller):
     @staticmethod
     async def upload_file(file: UploadFile) -> str:
         if file.content_type not in ["image/jpeg", "image/png"]:
-            raise FileValidationException(message="Allowed files extensions: jpg, png")
+            raise FileValidationException(message=_("Allowed files extensions: %(ext)s") % {"ext": "jpg, png"})
         content = await file.read()
         if len(content) > 4 * 1024 * 1024:
-            raise FileValidationException(message="Maximum file size: 4Mb")
+            raise FileValidationException(message=_("Maximum file size: %(filesize)s") % {"filesize": "4Mb"})
         filename_base = "screenshot"
         postfix = str(uuid4())
         extension = file.filename.rsplit(".", 1)[-1]

@@ -1,18 +1,18 @@
 <footer class="container footer sm:footer-horizontal gap-2 py-4">
   <aside>
     <p>© 2025 Minecraft Metro</p>
-    <p class="text-xs text-gray-500">Materials may be used with a link to this website.</p>
+    <p class="text-xs text-gray-500">{{ _("Materials may be used with a link to this website.") }}</p>
   </aside>
 
   <nav class="grid-flow-col md:place-self-center md:justify-self-end gap-6">
     {% if not request.user %}
-      <p><a href="{{ url_for('signin') }}" class="link">Sign in</a></p>
+      <p><a href="{{ url_for('signin') }}" class="link">{{ _("Sign in") }}</a></p>
     {% else %}
-      <p><a href="{{ url_for('admin.index') }}" class="link">Control</a></p>
+      <p><a href="{{ url_for('admin.index') }}" class="link">{{ _("Control") }}</a></p>
       <p><span class="link"
                hx-post="{{ url_for('logout') }}"
                hx-trigger="click"
-      >Sign out</span></p>
+      >{{ _("Sign out") }}</span></p>
     {% endif %}
   </nav>
 </footer>

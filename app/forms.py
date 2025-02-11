@@ -7,6 +7,8 @@ from wtforms.validators import InputRequired, DataRequired, NumberRange, Optiona
 from wtforms.widgets import NumberInput
 from wtforms.widgets.core import CheckboxInput, ListWidget
 
+from app.configs import _
+
 
 class FileValidationException(Exception):
     def __init__(self, message: str | None = None):
@@ -14,19 +16,19 @@ class FileValidationException(Exception):
 
 
 class LoginForm(Form):
-    username = StringField("Username", [InputRequired()])
-    password = PasswordField("Password", [InputRequired()])
+    username = StringField(_("Username"), [InputRequired()])
+    password = PasswordField(_("Password"), [InputRequired()])
 
 
 class WorldForm(Form):
-    name = StringField("Name", [InputRequired()])
-    order = IntegerField("Order", [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
+    name = StringField(_("Name"), [InputRequired()])
+    order = IntegerField(_("Order"), [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
 
 
 class LineForm(Form):
-    name = StringField("Name", [InputRequired()])
-    order = IntegerField("Order", [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
-    world_id = SelectField("World", [InputRequired()])
+    name = StringField(_("Name"), [InputRequired()])
+    order = IntegerField(_("Order"), [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
+    world_id = SelectField(_("World"), [InputRequired()])
 
 
 class StringFieldList(FieldList):
@@ -45,33 +47,33 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class StationForm(Form):
-    name = StringField("Name", [InputRequired()])
-    order = IntegerField("Order", [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
-    line_id = SelectField("Line", [InputRequired()])
-    platform_length = IntegerField("Platform length", widget=NumberInput(min=0, step=1))
-    platform_square = IntegerField("Platform area", widget=NumberInput(min=0, step=1))
-    platform_number = IntegerField("Platform number", widget=NumberInput(min=0, step=1))
-    entrance_number = IntegerField("Entrance number", widget=NumberInput(min=0, step=1))
-    has_depot = BooleanField("Has depot", default=False)
-    has_elevators = BooleanField("Has elevators", default=False)
-    is_underground = BooleanField("Is underground", default=False)
-    is_terminal = BooleanField("Is terminal", default=False)
+    name = StringField(_("Name"), [InputRequired()])
+    order = IntegerField(_("Order"), [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
+    line_id = SelectField(_("Line"), [InputRequired()])
+    platform_length = IntegerField(_("Platform length"), widget=NumberInput(min=0, step=1))
+    platform_square = IntegerField(_("Platform area"), widget=NumberInput(min=0, step=1))
+    platform_number = IntegerField(_("Platform number"), widget=NumberInput(min=0, step=1))
+    entrance_number = IntegerField(_("Entrance number"), widget=NumberInput(min=0, step=1))
+    has_depot = BooleanField(_("Has depot"), default=False)
+    has_elevators = BooleanField(_("Has elevators"), default=False)
+    is_underground = BooleanField(_("Is underground"), default=False)
+    is_terminal = BooleanField(_("Is terminal"), default=False)
     materials = StringFieldList(
-        StringField("Material", [DataRequired()], description="Enter material"),
-        label="Materials",
-        description="Enter material",
+        StringField(_("Material"), [DataRequired()], description="Enter material"),
+        label=_("Materials"),
+        description=_("Enter material"),
     )
 
 
 class StationTransfersForm(Form):
     transfers = MultiCheckboxField(
-        "Transfers",
+        _("Transfers"),
         option_widget=CheckboxInput(),
         widget=ListWidget(prefix_label=False),
     )
 
 
 class StationScreenshotForm(Form):
-    image = FileField("Image", [InputRequired()])
-    title = StringField("Title")
-    order = IntegerField("Order", [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))
+    image = FileField(_("Image"), [InputRequired()])
+    title = StringField(_("Title"))
+    order = IntegerField(_("Order"), [Optional(), NumberRange(min=0)], widget=NumberInput(min=0, step=1))

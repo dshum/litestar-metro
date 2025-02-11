@@ -1,5 +1,5 @@
 {% set url = url_for('admin.line.update', line_id=line.id) if line else url_for('admin.line.create') %}
-{% set action = "Save" if line else "Add" %}
+{% set action = _("Save") if line else _("Add") %}
 
 <form
     hx-trigger="submit" hx-post="{{ url }}"

@@ -34,12 +34,12 @@
   <main class="container flex-1">
     <div class="flex flex-col lg:flex-row items-start gap-6">
       <div class="hidden lg:block flex-0 min-w-64">
-        <h2 class="text-3xl mb-6">Menu</h2>
+        <h2 class="text-3xl mb-6">{{ _("Menu") }}</h2>
         <ul class="text-xl flex flex-col gap-4">
-          <li><a href="{{ url_for('admin.index') }}" class="link">Dashboard</a></li>
-          <li><a href="{{ url_for('admin.world.index') }}" class="link">Worlds</a></li>
-          <li><a href="{{ url_for('admin.line.index') }}" class="link">Lines</a></li>
-          <li><a href="{{ url_for('admin.station.index') }}" class="link">Stations</a></li>
+          <li><a href="{{ url_for('admin.index') }}" class="link">{{ _("Dashboard") }}</a></li>
+          <li><a href="{{ url_for('admin.world.index') }}" class="link">{{ _("Worlds") }}</a></li>
+          <li><a href="{{ url_for('admin.line.index') }}" class="link">{{ _("Lines") }}</a></li>
+          <li><a href="{{ url_for('admin.station.index') }}" class="link">{{ _("Stations") }}</a></li>
         </ul>
       </div>
       <div class="flex-1 w-full">
@@ -64,7 +64,7 @@
     put event.detail.xhr.responseText into <#alert-error > div > span />
     add .visible to #alert-error
     remove .hidden from #alert-error
-    js document.querySelectorAll("dialog.modal").forEach((element) => element.close())
+    js document.querySelectorAll("dialog.modal").forEach((element) => element.close()) end
     wait 5s
     add .hidden to #alert-error
     remove .visible from #alert-error

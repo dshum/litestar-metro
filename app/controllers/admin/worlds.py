@@ -10,6 +10,7 @@ from litestar.plugins.flash import flash
 from litestar.response import Template
 from litestar_htmx import HTMXTemplate, ClientRefresh, ClientRedirect
 
+from app.configs import _
 from app.dependencies import provide_world_service
 from app.forms import WorldForm
 from app.services import WorldService
@@ -45,7 +46,7 @@ class WorldController(Controller):
         form = WorldForm(formdata=MultiDict(data))
         if form.validate():
             await world_service.create(data=form.data)
-            flash(request, "World has been successfully created!", category="success")
+            flash(request, _("World has been successfully created!"), category="success")
             path = request.app.route_reverse("admin.world.index")
             return ClientRedirect(path)
         return HTMXTemplate(template_name="admin/worlds/form.html", context={"form": form})
@@ -73,7 +74,7 @@ class WorldController(Controller):
         form = WorldForm(formdata=MultiDict(data))
         if form.validate():
             await world_service.update(data=form.data, item_id=world.id)
-            flash(request, "World has been successfully updated!", category="success")
+            flash(request, _("World has been successfully updated!"), category="success")
             return ClientRefresh()
         return HTMXTemplate(template_name="admin/worlds/form.html", context={"world": world, "form": form})
 

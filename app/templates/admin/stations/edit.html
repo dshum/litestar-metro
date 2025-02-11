@@ -4,10 +4,10 @@
   <h2 class="text-3xl mb-6">{{ station.name }}</h2>
 
   <div role="tablist" class="tabs tabs-box mb-6">
-    <a href="{{ url_for('admin.station.view', station_id=station.id) }}" role="tab" class="tab">View</a>
-    <a href="{{ url_for('admin.station.edit', station_id=station.id) }}" role="tab" class="tab tab-active">Edit</a>
-    <a href="{{ url_for('admin.station.transfers.edit', station_id=station.id) }}" role="tab" class="tab">Transfers</a>
-    <a href="{{ url_for('admin.station.screenshots.index', station_id=station.id) }}" role="tab" class="tab">Screenshots</a>
+    <a href="{{ url_for('admin.station.view', station_id=station.id) }}" role="tab" class="tab">{{ _("View") }}</a>
+    <a href="{{ url_for('admin.station.edit', station_id=station.id) }}" role="tab" class="tab tab-active">{{ _("Edit") }}</a>
+    <a href="{{ url_for('admin.station.transfers.edit', station_id=station.id) }}" role="tab" class="tab">{{ _("Transfers") }}</a>
+    <a href="{{ url_for('admin.station.screenshots.index', station_id=station.id) }}" role="tab" class="tab">{{ _("Screenshots") }}</a>
   </div>
 
   <div class="grid xl:grid-cols-2 gap-6">

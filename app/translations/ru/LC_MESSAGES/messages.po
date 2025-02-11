@@ -1,0 +1,400 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-02-11 18:21+0300\n"
+"PO-Revision-Date: 2025-02-10 23:54+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app/exceptions.py:37
+msgid "Bad request"
+msgstr "Неверный запрос"
+
+#: app/exceptions.py:39
+msgid "Access denied"
+msgstr "Доступ запрещен"
+
+#: app/exceptions.py:41
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: app/exceptions.py:43
+msgid "Internal server error"
+msgstr "Внутренняя ошибка сервера"
+
+#: app/forms.py:19
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: app/forms.py:20
+msgid "Password"
+msgstr "Пароль"
+
+#: app/forms.py:24 app/forms.py:29 app/forms.py:50
+#: app/templates/admin/lines/index.html:15
+#: app/templates/admin/stations/index.html:15
+#: app/templates/admin/worlds/index.html:15
+msgid "Name"
+msgstr "Имя"
+
+#: app/forms.py:25 app/forms.py:30 app/forms.py:51 app/forms.py:79
+#: app/templates/admin/lines/index.html:17
+#: app/templates/admin/stations/index.html:18
+#: app/templates/admin/worlds/index.html:16
+msgid "Order"
+msgstr "Порядок"
+
+#: app/forms.py:31 app/templates/admin/lines/index.html:16
+#: app/templates/admin/stations/index.html:17
+msgid "World"
+msgstr "Мир"
+
+#: app/forms.py:52 app/templates/admin/stations/index.html:16
+msgid "Line"
+msgstr "Линия"
+
+#: app/forms.py:53 app/templates/admin/stations/view.html:32
+#: app/templates/station.html:28
+msgid "Platform length"
+msgstr "Длина платформы"
+
+#: app/forms.py:54 app/templates/admin/stations/view.html:37
+#: app/templates/station.html:33
+msgid "Platform area"
+msgstr "Площадь платформы"
+
+#: app/forms.py:55 app/templates/admin/stations/view.html:42
+#: app/templates/station.html:38
+msgid "Platform number"
+msgstr "Число платформ"
+
+#: app/forms.py:56 app/templates/admin/stations/view.html:47
+#: app/templates/station.html:43
+msgid "Entrance number"
+msgstr "Число выходов"
+
+#: app/forms.py:57
+msgid "Has depot"
+msgstr "Есть депо"
+
+#: app/forms.py:58
+msgid "Has elevators"
+msgstr "Есть лифты"
+
+#: app/forms.py:59
+msgid "Is underground"
+msgstr "Подземная станция"
+
+#: app/forms.py:60
+msgid "Is terminal"
+msgstr "Конечная станция"
+
+#: app/forms.py:62
+msgid "Material"
+msgstr "Материал"
+
+#: app/forms.py:63 app/templates/admin/stations/view.html:65
+#: app/templates/station.html:61
+msgid "Materials"
+msgstr "Материалы"
+
+#: app/forms.py:64
+msgid "Enter material"
+msgstr "Введите материал"
+
+#: app/forms.py:70 app/templates/admin/stations/edit.html:9
+#: app/templates/admin/stations/index.html:19
+#: app/templates/admin/stations/screenshots/index.html:10
+#: app/templates/admin/stations/transfers/edit.html:10
+#: app/templates/admin/stations/view.html:11
+#: app/templates/admin/stations/view.html:18 app/templates/station.html:14
+msgid "Transfers"
+msgstr "Пересадки"
+
+#: app/forms.py:77
+msgid "Image"
+msgstr "Изображение"
+
+#: app/forms.py:78
+msgid "Title"
+msgstr "Заголовок"
+
+#: app/services.py:42 app/services.py:44
+msgid "Incorrect username or password"
+msgstr "Неверное имя пользователя или пароль"
+
+#: app/services.py:46
+msgid "User is inactive"
+msgstr "Пользователь неактивен"
+
+#: app/controllers/admin/lines.py:55
+msgid "Line has been successfully created!"
+msgstr "Линия была успешно создана!"
+
+#: app/controllers/admin/lines.py:93
+msgid "Line has been successfully updated!"
+msgstr "Линия была успешно обновлена!"
+
+#: app/controllers/admin/screenshots.py:87
+msgid "Screenshot has been successfully uploaded!"
+msgstr "Скриншот был успешно загружен!"
+
+#: app/controllers/admin/screenshots.py:103
+#, python-format
+msgid "Allowed files extensions: %(ext)s"
+msgstr "Допустимые типы файлов: %(ext)s"
+
+#: app/controllers/admin/screenshots.py:106
+#, python-format
+msgid "Maximum file size: %(filesize)s"
+msgstr "Максимальный размер файла: %(filesize)s"
+
+#: app/controllers/admin/stations.py:76
+msgid "Station has been successfully created!"
+msgstr "Станция была успешно создана!"
+
+#: app/controllers/admin/stations.py:117
+msgid "Station has been successfully updated!"
+msgstr "Станция была успешно обновлена!"
+
+#: app/controllers/admin/transfers.py:66
+msgid "Transfers have been successfully updated!"
+msgstr "Пересадки были успешно обновлены!"
+
+#: app/controllers/admin/worlds.py:49
+msgid "World has been successfully created!"
+msgstr "Мир был успешно создан!"
+
+#: app/controllers/admin/worlds.py:77
+msgid "World has been successfully updated!"
+msgstr "Мир был успешно обновлен!"
+
+#: app/templates/error.html:10
+msgid "To main page"
+msgstr "На главную страницу"
+
+#: app/templates/admin/stations/index.html:41
+#: app/templates/admin/stations/view.html:22 app/templates/index.html:11
+#: app/templates/station.html:6 app/templates/station.html:18
+#: app/templates/stations.html:13
+msgid "line"
+msgstr "линия"
+
+#: app/templates/admin/lines/index.html:54
+#: app/templates/admin/stations/index.html:77
+#: app/templates/admin/stations/screenshots/index.html:44
+#: app/templates/admin/stations/view.html:93
+#: app/templates/admin/worlds/index.html:52 app/templates/index.html:44
+#: app/templates/index.html:48 app/templates/index.html:52
+#: app/templates/station.html:89 app/templates/stations.html:18
+msgid "No information available"
+msgstr "Информация отсутствует"
+
+#: app/templates/admin/stations/edit.html:8
+#: app/templates/admin/stations/screenshots/index.html:8
+#: app/templates/admin/stations/transfers/edit.html:8
+#: app/templates/admin/stations/view.html:9 app/templates/station.html:8
+msgid "Edit"
+msgstr "Редактировать"
+
+#: app/templates/admin/stations/view.html:26 app/templates/station.html:22
+msgid "No transfers here"
+msgstr "Нет пересадок"
+
+#: app/templates/admin/stations/view.html:74 app/templates/station.html:70
+msgid "Materials are not specified"
+msgstr "Материалы не указаны"
+
+#: app/templates/admin/stations/view.html:79 app/templates/station.html:75
+msgid "Station has depot"
+msgstr "Станция имеет депо"
+
+#: app/templates/admin/stations/view.html:80 app/templates/station.html:76
+msgid "Underground station"
+msgstr "Подземная станция"
+
+#: app/templates/admin/stations/view.html:81 app/templates/station.html:77
+msgid "Station has elevators"
+msgstr "Станция имеет лифты"
+
+#: app/templates/admin/stations/view.html:82 app/templates/station.html:78
+msgid "Terminal station"
+msgstr "Конечная станция"
+
+#: app/templates/admin/stations/view.html:86 app/templates/station.html:82
+msgid "Additional"
+msgstr "Дополнительно"
+
+#: app/templates/stations.html:4
+msgid "All station"
+msgstr "Все станции"
+
+#: app/templates/admin/index.html:4 app/templates/admin/layouts/default.html:39
+msgid "Dashboard"
+msgstr "Информация"
+
+#: app/templates/admin/components/confirm_delete.html:3
+msgid "Are you sure want to"
+msgstr "Вы действительно хотите"
+
+#: app/templates/admin/components/confirm_delete.html:6
+#: app/templates/admin/components/confirm_delete.html:18
+msgid "Close"
+msgstr "Закрыть"
+
+#: app/templates/admin/components/confirm_delete.html:13
+#: app/templates/admin/lines/index.html:20
+#: app/templates/admin/stations/index.html:22
+#: app/templates/admin/worlds/index.html:19
+#: app/templates/components/form/string_field_list.html:12
+#: app/templates/components/form/string_field_list.html:25
+#: app/templates/components/form/string_field_list.html:38
+msgid "Remove"
+msgstr "Удалить"
+
+#: app/templates/admin/components/header.html:21
+#: app/templates/admin/layouts/default.html:40
+#: app/templates/admin/worlds/index.html:4
+msgid "Worlds"
+msgstr "Миры"
+
+#: app/templates/admin/components/header.html:22
+#: app/templates/admin/layouts/default.html:41
+#: app/templates/admin/lines/index.html:4
+#: app/templates/admin/worlds/index.html:18
+msgid "Lines"
+msgstr "Линии"
+
+#: app/templates/admin/components/header.html:23
+#: app/templates/admin/layouts/default.html:42
+#: app/templates/admin/lines/index.html:19
+#: app/templates/admin/stations/index.html:4
+msgid "Stations"
+msgstr "Станции"
+
+#: app/templates/admin/layouts/default.html:37
+msgid "Menu"
+msgstr "Меню"
+
+#: app/templates/admin/lines/add.html:4
+msgid "New line"
+msgstr "Новая линия"
+
+#: app/templates/admin/lines/form.html:2
+#: app/templates/admin/stations/form.html:2
+#: app/templates/admin/stations/screenshots/form.html:11
+#: app/templates/admin/stations/transfers/form.html:9
+#: app/templates/admin/worlds/form.html:2
+msgid "Save"
+msgstr "Сохранить"
+
+#: app/templates/admin/lines/form.html:2
+#: app/templates/admin/stations/form.html:2
+#: app/templates/admin/worlds/form.html:2
+msgid "Add"
+msgstr "Добавить"
+
+#: app/templates/admin/lines/index.html:7
+msgid "Create a new line"
+msgstr "Добавить новую линию"
+
+#: app/templates/admin/lines/index.html:18
+#: app/templates/admin/stations/index.html:21
+#: app/templates/admin/worlds/index.html:17
+msgid "Created at"
+msgstr "Создано"
+
+#: app/templates/admin/lines/index.html:42
+msgid "remove the line"
+msgstr "удалить линию"
+
+#: app/templates/admin/stations/add.html:4
+msgid "New station"
+msgstr "Новая станция"
+
+#: app/templates/admin/stations/edit.html:7
+#: app/templates/admin/stations/screenshots/index.html:7
+#: app/templates/admin/stations/transfers/edit.html:7
+#: app/templates/admin/stations/view.html:8
+msgid "View"
+msgstr "Просмотр"
+
+#: app/templates/admin/stations/edit.html:10
+#: app/templates/admin/stations/index.html:20
+#: app/templates/admin/stations/screenshots/index.html:12
+#: app/templates/admin/stations/transfers/edit.html:12
+#: app/templates/admin/stations/view.html:13
+msgid "Screenshots"
+msgstr "Скриншоты"
+
+#: app/templates/admin/stations/index.html:7
+msgid "Create a new station"
+msgstr "Добавить новую станцию"
+
+#: app/templates/admin/stations/index.html:65
+msgid "remove the station"
+msgstr "удалить станцию"
+
+#: app/templates/admin/stations/screenshots/index.html:33
+msgid "remove the file"
+msgstr "удалить файл"
+
+#: app/templates/admin/worlds/add.html:4
+msgid "New world"
+msgstr "Новый мир"
+
+#: app/templates/admin/worlds/index.html:7
+msgid "Create a new world"
+msgstr "Добавить новый мир"
+
+#: app/templates/admin/worlds/index.html:40
+msgid "remove the world"
+msgstr "удалить мир"
+
+#: app/templates/components/footer.html:4
+msgid "Materials may be used with a link to this website."
+msgstr "Материалы могут быть использованы со ссылкой на этот веб-сайт."
+
+#: app/templates/components/footer.html:9
+msgid "Sign in"
+msgstr "Вход"
+
+#: app/templates/components/footer.html:11
+msgid "Control"
+msgstr "Управление"
+
+#: app/templates/components/footer.html:15
+msgid "Sign out"
+msgstr "Выход"
+
+#: app/templates/components/header.html:21
+#: app/templates/components/header.html:33
+msgid "All stations"
+msgstr "Все станции"
+
+#: app/templates/components/form/string_field_list.html:52
+msgid "Add field"
+msgstr "Добавить поле"
+
+#~ msgid "station"
+#~ msgstr "станция"
+
+#~ msgid "file"
+#~ msgstr "файл"
+
+#~ msgid "world"
+#~ msgstr "мир"
+

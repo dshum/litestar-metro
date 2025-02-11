@@ -9,7 +9,7 @@
             <input type="text" name="{{ subfield.name }}" value="{{ subfield.data }}" class="input input-sm w-full"
                    placeholder="{{ subfield.description }}">
             <button type="button" class="btn btn-sm btn-error"
-                    _="on click remove me.closest('.field')">Remove
+                    _="on click remove me.closest('.field')">{{ _("Remove") }}
             </button>
           </div>
           <p class="fieldset-label text-error">
@@ -22,7 +22,7 @@
             <input type="text" name="{{ subfield.name }}" value="{{ subfield.data }}" class="input input-sm w-full"
                    placeholder="{{ subfield.description }}">
             <button type="button" class="btn btn-sm btn-error"
-                    _="on click remove me.closest('.field')">Remove
+                    _="on click remove me.closest('.field')">{{ _("Remove") }}
             </button>
           </div>
         {% endif %}
@@ -35,7 +35,7 @@
       <input type="text" name="" class="input input-sm w-full"
              placeholder="{{ field.description }}">
       <button type="button" class="btn btn-sm btn-error"
-              _="on click remove me.closest('.field')">Remove
+              _="on click remove me.closest('.field')">{{ _("Remove") }}
       </button>
     </div>
   </div>
@@ -49,7 +49,7 @@
                 then set fieldInput to <input/> in newField
                 then set fieldInput's name to getNextFieldName()
                 then put newField at the end of #{{ field.name }}-field-container
-          ">Add Field
+          ">{{ _("Add field") }}
   </button>
 </fieldset>
 

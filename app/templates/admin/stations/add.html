@@ -1,7 +1,7 @@
 {% extends "admin/layouts/default.html" %}
 
 {% block content %}
-  <h2 class="text-3xl mb-6">New station</h2>
+  <h2 class="text-3xl mb-6">{{ _("New station") }}</h2>
 
   <div class="grid xl:grid-cols-2 gap-6">
     <div hx-get="{{ url_for('admin.station.add.form') }}" hx-trigger="load"></div>

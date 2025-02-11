@@ -4,10 +4,12 @@
   <h2 class="text-3xl mb-6">{{ station.name }}</h2>
 
   <div role="tablist" class="tabs tabs-box mb-6">
-    <a href="{{ url_for('admin.station.view', station_id=station.id) }}" role="tab" class="tab">View</a>
-    <a href="{{ url_for('admin.station.edit', station_id=station.id) }}" role="tab" class="tab">Edit</a>
-    <a href="{{ url_for('admin.station.transfers.edit', station_id=station.id) }}" role="tab" class="tab">Transfers</a>
-    <a href="{{ url_for('admin.station.screenshots.index', station_id=station.id) }}" role="tab" class="tab tab-active">Screenshots</a>
+    <a href="{{ url_for('admin.station.view', station_id=station.id) }}" role="tab" class="tab">{{ _("View") }}</a>
+    <a href="{{ url_for('admin.station.edit', station_id=station.id) }}" role="tab" class="tab">{{ _("Edit") }}</a>
+    <a href="{{ url_for('admin.station.transfers.edit', station_id=station.id) }}" role="tab"
+       class="tab">{{ _("Transfers") }}</a>
+    <a href="{{ url_for('admin.station.screenshots.index', station_id=station.id) }}" role="tab"
+       class="tab tab-active">{{ _("Screenshots") }}</a>
   </div>
 
   <div class="grid xl:grid-cols-2 gap-6 mb-6">
@@ -28,7 +30,7 @@
           </button>
           {% with
                   id="modal-remove-"+screenshot.id|string,
-                  object="file &laquo;"+screenshot.image+"&raquo;?",
+                  object=_("remove the file")+" &laquo;"+screenshot.image+"&raquo;?",
                   url=url_for('admin.screenshot.delete', screenshot_id=screenshot.id),
                   target="closest figure" %}
             {% include "admin/components/confirm_delete.html" %}
@@ -39,6 +41,6 @@
       {% endfor %}
     </div>
   {% else %}
-    <p>No information available</p>
+    <p>{{ _("No information available") }}</p>
   {% endif %}
 {% endblock %}

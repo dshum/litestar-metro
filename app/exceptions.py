@@ -8,6 +8,8 @@ from litestar.exceptions import (
 from litestar.response import Template
 from litestar_htmx import HTMXRequest
 
+from app.configs import _
+
 
 def base_exception_handler(request: HTMXRequest, exc: Exception) -> Template:
     return error_response(request, exc, 500)
@@ -32,13 +34,13 @@ def validation_exception_handler(request: HTMXRequest, exc: ValidationException)
 def error_response(request: HTMXRequest, exc: Exception, code: int):
     match code:
         case 400:
-            message = "Bad request"
+            message = _("Bad request")
         case 403:
-            message = "Access denied"
+            message = _("Access denied")
         case 404:
-            message = "Page not found"
+            message = _("Page not found")
         case _:
-            message = exc.detail if hasattr(exc, "detail") else "Internal server error"
+            message = exc.detail if hasattr(exc, "detail") else _("Internal server error")
 
     if request.htmx:
         return Response(content=message, status_code=code, media_type=MediaType.TEXT)

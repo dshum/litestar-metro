@@ -8,7 +8,7 @@
 
       {% if lines %}
         {% for line in lines %}
-          <h3 class="mb-2 text-2xl">{{ line.name }} line</h3>
+          <h3 class="mb-2 text-2xl">{{ line.name }} {{ gettext("line") }}</h3>
 
           {% set stations = line.stations %}
           {% if stations %}
@@ -41,14 +41,14 @@
               {% endfor %}
             </ul>
           {% else %}
-            <p class="mb-6">No information available</p>
+            <p class="mb-6">{{ _("No information available") }}</p>
           {% endif %}
         {% endfor %}
       {% else %}
-        <p class="mb-6">No information available</p>
+        <p class="mb-6">{{ _("No information available") }}</p>
       {% endif %}
     {% endfor %}
   {% else %}
-    <p class="mb-6">No information available</p>
+    <p class="mb-6">{{ _("No information available") }}</p>
   {% endif %}
 {% endblock %}
