@@ -1,0 +1,22 @@
+services:
+  app:
+    container_name: metro
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - traefik_proxy
+    volumes:
+      - ./app:/workspace/app
+      - ./data:/workspace/data
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.honeytrap.rule=Host(`metro.pffft.ru`)"
+      - "traefik.http.routers.honeytrap.entrypoints=websecure"
+      - "traefik.http.routers.honeytrap.tls.certresolver=myresolver"
+      - "traefik.http.services.honeytrap.loadbalancer.server.port=8000"
+
+networks:
+  traefik_proxy:
+    external: true
