@@ -8,7 +8,7 @@ services:
       - traefik_proxy
     volumes:
       - ./app:/workspace/app
-      - ./data:/workspace/data
+      - ./storage/:/workspace/storage
     restart: unless-stopped
     labels:
       - "traefik.enable=true"

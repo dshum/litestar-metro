@@ -16,7 +16,6 @@ RUN pdm venv create && \
 
 # Copy the rest of the application code
 COPY app /workspace/app
-COPY babel.cfg messages.pot ./
 
 # Stage 2: Production stage
 FROM python:3.12-slim-bookworm AS final
@@ -27,7 +26,10 @@ WORKDIR /workspace
 # Copy only necessary artifacts from the builder stage
 COPY --from=builder /workspace/.venv /workspace/.venv
 COPY --from=builder /workspace/app /workspace/app
-COPY --from=builder /workspace/babel.cfg /workspace/messages.pot /workspace/
+
+# Copy files from the source
+COPY babel.cfg messages.pot ./
+COPY public /workspace/public
 
 # Set environment variables
 ENV PATH="/workspace/.venv/bin:$PATH"
