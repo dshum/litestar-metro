@@ -11,10 +11,10 @@ from litestar.response import Template
 from litestar_htmx import HTMXTemplate, ClientRefresh, ClientRedirect
 
 from app.configs import logging_config, _
-from app.dependencies import provide_station_service, provide_line_service
+from app.dependencies import provide_station_service, provide_world_service
 from app.forms import StationForm
 from app.models import Station
-from app.services import StationService, LineService
+from app.services import StationService, WorldService
 
 logger = logging_config.configure()()
 
@@ -22,7 +22,7 @@ logger = logging_config.configure()()
 class StationController(Controller):
     path = "/stations"
     dependencies = {
-        "line_service": Provide(provide_line_service),
+        "world_service": Provide(provide_world_service),
         "station_service": Provide(provide_station_service),
     }
 
@@ -54,23 +54,23 @@ class StationController(Controller):
         return Template(template_name="admin/stations/add.html", context={"station": None})
 
     @get("/add/form", name="admin.station.add.form")
-    async def add_form(self, line_service: LineService) -> HTMXTemplate:
+    async def add_form(self, world_service: WorldService, ) -> HTMXTemplate:
         form = StationForm()
-        lines = await line_service.list()
-        form.line_id.choices = [(line.id, f"{line.name}, {line.world.name}") for line in lines]
+        worlds = await world_service.list()
+        form.line_id.choices = {world.name: [(line.id, line.name) for line in world.lines] for world in worlds}
         return HTMXTemplate(template_name="admin/stations/form.html", context={"form": form})
 
     @post("/add", name="admin.station.create")
     async def create(
             self,
             request: Request,
-            line_service: LineService,
+            world_service: WorldService,
             station_service: StationService,
             data: dict[str, Any] = Body(media_type=RequestEncodingType.URL_ENCODED),
     ) -> HTMXTemplate | ClientRedirect:
         form = StationForm(formdata=MultiDict(data))
-        lines = await line_service.list()
-        form.line_id.choices = [(line.id, line.name) for line in lines]
+        worlds = await world_service.list()
+        form.line_id.choices = {world.name: [(line.id, line.name) for line in world.lines] for world in worlds}
         if form.validate():
             await station_service.create(data=form.data)
             flash(request, _("Station has been successfully created!"), category="success")
@@ -86,7 +86,7 @@ class StationController(Controller):
     @get("/{station_id:uuid}/form", name="admin.station.edit.form")
     async def edit_form(
             self,
-            line_service: LineService,
+            world_service: WorldService,
             station_service: StationService,
             station_id: UUID,
     ) -> HTMXTemplate:
@@ -95,23 +95,23 @@ class StationController(Controller):
             data=station.to_dict(),
             materials=[material.russian_name for material in station.materials],
         )
-        lines = await line_service.list()
-        form.line_id.choices = [(line.id, f"{line.name}, {line.world.name}") for line in lines]
+        worlds = await world_service.list()
+        form.line_id.choices = {world.name: [(line.id, line.name) for line in world.lines] for world in worlds}
         return HTMXTemplate(template_name="admin/stations/form.html", context={"station": station, "form": form})
 
     @post("/{station_id:uuid}", name="admin.station.update")
     async def save(
             self,
             request: Request,
-            line_service: LineService,
+            world_service: WorldService,
             station_service: StationService,
             station_id: UUID,
             data: dict[str, Any] = Body(media_type=RequestEncodingType.URL_ENCODED),
     ) -> HTMXTemplate | ClientRefresh:
         station = await station_service.get(station_id)
         form = StationForm(formdata=MultiDict(data))
-        lines = await line_service.list()
-        form.line_id.choices = [(line.id, line.name) for line in lines]
+        worlds = await world_service.list()
+        form.line_id.choices = {world.name: [(line.id, line.name) for line in world.lines] for world in worlds}
         if form.validate():
             await station_service.update(data=form.data, item_id=station.id)
             flash(request, _("Station has been successfully updated!"), category="success")
