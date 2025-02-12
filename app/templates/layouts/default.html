@@ -29,9 +29,6 @@
 </div>
 
 {{ vite_hmr() }} {{ vite('resources/main.ts') }}
-<script
-    src="https://unpkg.com/htmx.org@2.0.4"
-    integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
-    crossorigin="anonymous"></script>
+<script src="{{ url_for('vite', file_path='js/htmx.min.js') }}"></script>
 </body>
 </html>

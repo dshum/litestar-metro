@@ -34,6 +34,10 @@ export default defineConfig({
         {
           src: "resources/images",
           dest: ""
+        },
+        {
+          src: "resources/js",
+          dest: ""
         }
       ]
     }),
