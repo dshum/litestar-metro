@@ -82,5 +82,5 @@ class WorldController(Controller):
     async def delete(self, world_service: WorldService, world_id: UUID) -> Response | None:
         world = await world_service.get(world_id)
         if world.lines:
-            return Response(content="Cannot delete non-empty world", status_code=400)
+            return Response(content=_("You cannot delete a non-empty world"), status_code=400)
         await world_service.delete(item_id=world_id)

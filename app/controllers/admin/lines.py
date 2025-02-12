@@ -98,5 +98,5 @@ class LineController(Controller):
     async def delete(self, line_service: LineService, line_id: UUID) -> Response | None:
         line = await line_service.get(line_id)
         if line.stations:
-            return Response(content="Cannot delete non-empty line", status_code=400)
+            return Response(content=_("You cannot delete a non-empty line"), status_code=400)
         await line_service.delete(item_id=line_id)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-02-11 18:21+0300\n"
+"POT-Creation-Date: 2025-02-12 09:40+0300\n"
 "PO-Revision-Date: 2025-02-10 23:54+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -148,6 +148,10 @@ msgstr "Линия была успешно создана!"
 msgid "Line has been successfully updated!"
 msgstr "Линия была успешно обновлена!"
 
+#: app/controllers/admin/lines.py:101
+msgid "You cannot delete a non-empty line"
+msgstr "Нельзя удалить непустую линию"
+
 #: app/controllers/admin/screenshots.py:87
 msgid "Screenshot has been successfully uploaded!"
 msgstr "Скриншот был успешно загружен!"
@@ -181,6 +185,10 @@ msgstr "Мир был успешно создан!"
 #: app/controllers/admin/worlds.py:77
 msgid "World has been successfully updated!"
 msgstr "Мир был успешно обновлен!"
+
+#: app/controllers/admin/worlds.py:85
+msgid "You cannot delete a non-empty world"
+msgstr "Нельзя удалить непустой мир"
 
 #: app/templates/error.html:10
 msgid "To main page"
@@ -388,13 +396,4 @@ msgstr "Все станции"
 #: app/templates/components/form/string_field_list.html:52
 msgid "Add field"
 msgstr "Добавить поле"
-
-#~ msgid "station"
-#~ msgstr "станция"
-
-#~ msgid "file"
-#~ msgstr "файл"
-
-#~ msgid "world"
-#~ msgstr "мир"
 
