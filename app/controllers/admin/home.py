@@ -2,18 +2,16 @@ from litestar import Controller, get
 from litestar.di import Provide
 from litestar.response import Template
 
-from app.dependencies import provide_line_service, provide_station_service
-from app.models import Line
-from app.services import LineService
+from app.dependencies import provide_world_service
+from app.services import WorldService
 
 
 class HomeController(Controller):
     dependencies = {
-        "line_service": Provide(provide_line_service),
-        "station_service": Provide(provide_station_service),
+        "world_service": Provide(provide_world_service),
     }
 
     @get("/", name="admin.index")
-    async def get_index(self, line_service: LineService) -> Template:
-        lines = await line_service.list(order_by=[(Line.order, False)])
-        return Template(template_name="admin/index.html", context={"lines": lines})
+    async def get_index(self, world_service: WorldService) -> Template:
+        worlds = await world_service.list()
+        return Template(template_name="admin/index.html", context={"worlds": worlds})

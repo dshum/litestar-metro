@@ -1,5 +1,54 @@
 {% extends "admin/layouts/default.html" %}
 
 {% block content %}
-  <h2 class="text-3xl mb-6">{{ _("Dashboard") }}</h2>
+  {% if worlds %}
+    {% for world in worlds %}
+      <h2 class="text-3xl mb-6">{{ world.name }}</h2>
+      {% set lines = world.lines %}
+
+      {% if lines %}
+        {% for line in lines %}
+          <h3 class="mb-2 text-2xl">{{ line.name }} {{ gettext("line") }}</h3>
+
+          {% set stations = line.stations %}
+          {% if stations %}
+            <ul class="timeline">
+              {% for station in stations %}
+                <li>
+                  {% if not loop.first %}
+                    <hr class="bg-purple-400"/>
+                  {% endif %}
+                  <div class="timeline-start timeline-box">
+                    <a href="{{ url_for('station', station_id=station.id) }}"
+                       class="link text-base">{{ station.name }}</a>
+                  </div>
+                  <div class="timeline-middle">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="h-5 w-5">
+                      <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                          clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  {% if not loop.last %}
+                    <hr class="bg-purple-400"/>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="mb-6">{{ _("No information available") }}</p>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <p class="mb-6">{{ _("No information available") }}</p>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <p class="mb-6">{{ _("No information available") }}</p>
+  {% endif %}
 {% endblock %}
