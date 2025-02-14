@@ -103,5 +103,5 @@ vite_config = ViteConfig(
 )
 
 vite_static_files_config = StaticFilesConfig(
-    cache_control=CacheControlHeader(max_age=3600),
+    cache_control=CacheControlHeader(max_age=30 * 24 * 60 * 60),
 )
