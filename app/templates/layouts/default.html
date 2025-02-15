@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minecraft Metro</title>
   <link rel="icon" href="{{ url_for('vite', file_path='images/favicon.png') }}" sizes="16x16" type="image/png">
+  {{ vite_hmr() }} {{ vite('resources/main.ts') }}
+  <script src="{{ url_for('vite', file_path='js/htmx.min.js') }}"></script>
   <script>
     (function () {
       const savedTheme = localStorage.getItem("theme") || "light"
@@ -27,8 +29,5 @@
     {% include "components/footer.html" %}
   </div>
 </div>
-
-{{ vite_hmr() }} {{ vite('resources/main.ts') }}
-<script src="{{ url_for('vite', file_path='js/htmx.min.js') }}"></script>
 </body>
 </html>

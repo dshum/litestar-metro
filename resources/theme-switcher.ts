@@ -1,4 +1,5 @@
 const themeCheckbox = document.querySelector(".theme-controller") as HTMLInputElement
+const label = themeCheckbox.closest("label.hidden")
 
 function setTheme(theme: string): void {
   document.documentElement.setAttribute("data-theme", theme)
@@ -17,12 +18,12 @@ function handleThemeChange(): void {
 function initializeTheme(): void {
   const savedTheme = localStorage.getItem("theme") || "light"
   setTheme(savedTheme)
-  const label = themeCheckbox.closest("label")
-  label?.classList.remove("hidden")
+  if (label) {
+    label.classList.remove("hidden")
+  }
 }
 
 if (themeCheckbox) {
   themeCheckbox.addEventListener("change", handleThemeChange)
+  initializeTheme()
 }
-
-initializeTheme()
