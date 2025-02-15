@@ -13,7 +13,7 @@ class AppSettings(BaseSettings):
     )
 
     DEBUG: bool = False
-    REQUEST_MAX_BODY_SIZE: int = 10_000_000
+    REQUEST_MAX_BODY_SIZE: int = 15_000_000
     DEFAULT_LOCALE: str = "ru_RU"
 
 

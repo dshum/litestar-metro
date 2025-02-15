@@ -16,12 +16,13 @@ from litestar.response import Template
 from litestar_htmx import HTMXTemplate, HTMXRequest, ClientRefresh
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.configs import logging_config, screenshots_path, _
+from app.configs import screenshots_path, _
 from app.dependencies import provide_station_service, provide_screenshot_service
 from app.forms import StationScreenshotForm, FileValidationException
 from app.services import StationService, ScreenshotService
 
-logger = logging_config.configure()()
+MAX_FILE_SIZE_MB = 10
+IMAGE_RESIZE = (800, 600)
 
 
 @dataclass
@@ -102,17 +103,20 @@ class StationScreenshotsController(Controller):
         if file.content_type not in ["image/jpeg", "image/png"]:
             raise FileValidationException(message=_("Allowed files extensions: %(ext)s") % {"ext": "jpg, png"})
         content = await file.read()
-        if len(content) > 4 * 1024 * 1024:
-            raise FileValidationException(message=_("Maximum file size: %(filesize)s") % {"filesize": "4Mb"})
+        if len(content) > MAX_FILE_SIZE_MB * 1024 * 1024:
+            raise FileValidationException(
+                message=_("Maximum file size: %(filesize)sMb") % {"filesize": MAX_FILE_SIZE_MB},
+            )
         filename_base = "screenshot"
         postfix = str(uuid4())
         extension = file.filename.rsplit(".", 1)[-1]
         filename = f"{filename_base}-{postfix}.{extension}"
         filepath = screenshots_path / filename
+        image_format = "JPEG" if extension.lower() == "jpg" else extension.upper()
         image = Image.open(BytesIO(content))
-        image.thumbnail(size=(800, 600))
+        image.thumbnail(size=IMAGE_RESIZE)
         buf = BytesIO()
-        image.save(buf, format=extension)
+        image.save(buf, format=image_format)
         async with await anyio.open_file(anyio.Path(filepath), "wb") as f:
             await f.write(buf.getbuffer())
         return filename
