@@ -54,8 +54,6 @@
 </div>
 
 {{ vite_hmr() }} {{ vite('resources/main.ts') }}
-<script src="{{ url_for('vite', file_path='js/htmx.min.js') }}"></script>
-<script src="{{ url_for('vite', file_path='js/_hyperscript.min.js') }}"></script>
 <script type="text/hyperscript">
   on htmx:responseError
     put event.detail.xhr.responseText into <#alert-error > div > span />
@@ -66,5 +64,7 @@
     add .hidden to #alert-error
     remove .visible from #alert-error
 </script>
+<script src="{{ url_for('vite', file_path='js/htmx.min.js') }}"></script>
+<script src="{{ url_for('vite', file_path='js/_hyperscript.min.js') }}"></script>
 </body>
 </html>
